@@ -12,13 +12,13 @@ while true {
     print("How many words will be provided?")
     guard let givenInput = readLine() else {
         continue
-    }
+    } //filter out nil input. if invalid input is given, keep prompting until valid input is given.
     guard let integerInput = Int(givenInput) else {
         continue
-    }
+    } //filter out non-integer input. if invalid input is given, keep prompting until valid input is given.
     if integerInput < 0 || integerInput > 10 {
         continue
-    }
+    } //filter out integer input that is less than 0 or more than 10. if invalid input is given, keep prompting until valid input is given.
     expectedWords = integerInput
     break
 }
@@ -38,23 +38,23 @@ for counter in 1...expectedWords {
     print("Enter word #\(counter):")
     guard let givenInput = readLine() else {
         continue
-    }
+    } //collects user input
 
     for character in givenInput {
         switch character {
         case "A", "E", "I", "O", "U", "Y":
             if firstVowel == "" {
             firstVowel += String(character)
-            } else {
+            } else { //if a vowel has not been detected, designate the current vowel as the first vowel
                 afterVowel += String(character)
-            }
+            } //if a vowel has been detected, add the current vowel to the string of letters after the first vowel
             break
         default:
             if firstVowel == "" {
                 beforeVowel += String(character)
-            } else {
+            } else { //if a consonant is detected before the first vowel is found, add it to a string of letters before the first vowel
                 afterVowel += String(character)
-            }
+            } //if a consonant is detected after the first vowel is found, add it to a string of letters after the first vowel
         }
     }
     
@@ -62,6 +62,8 @@ for counter in 1...expectedWords {
     translated += afterVowel
     translated += beforeVowel
     translated += "AY"
+
+    //arrange the first vowel, pre-vowel letters, post-vowel letters according to the rules of pig latin and add ay to the end
     
     print("In pig latin: \(translated)")
 }
